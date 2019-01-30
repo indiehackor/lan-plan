@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="login-container">
+    <form class="login-container" @submit="letsGo">
         <label
             for="email"
             class="input-label"
@@ -41,11 +41,10 @@
             </label>
         </span>
         <button
-            @click="letsGo"
             id="login-button"
         >Let's go!
         </button>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -66,7 +65,8 @@
       }
     },
     methods: {
-      letsGo () {
+      letsGo(e) {
+        e.preventDefault()
         if (!this.newUser && !this.forgotPassword) {
           login(this.email, this.password)
         } else if (this.newUser && !this.forgotPassword) {
@@ -74,10 +74,10 @@
         } else if (!this.newUser && this.forgotPassword && this.email) {
           sendResetEmail(this.email)
         } else if (this.newUser && this.forgotPassword) {
-          alert("Nysgjerrigper!")
+          alert('Nysgjerrigper!')
         }
       }
-    },
+    }
   }
 </script>
 
