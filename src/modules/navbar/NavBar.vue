@@ -1,6 +1,6 @@
 <template>
     <div id="nav-bar">
-        <span>
+        <span class="email">
             {{email}}
         </span>
         <div>
@@ -40,7 +40,24 @@
         position: absolute
         display: flex
         justify-content: space-between
+        align-items: center
+        padding: 0 20px
         top: 0
         left: 0
         right: 0
+        font-size: 18px
+    button
+        height: 40px
+        width: 100px
+        border-radius: 5px
+        transition: 200ms
+        font-size: 16px
+        background: lightslategrey
+        outline: none
+        color: white
+        &:hover
+            color: black
+            background: white
+        &:active
+            box-shadow: 0 0 5px white
 </style>
