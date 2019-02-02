@@ -1,34 +1,51 @@
 <template>
     <div id="app">
-        <img alt="Vue logo" src="./assets/logo.png">
-        <h1>Welcome!</h1>
-        <div>
-            {{loading ? 'Loading...' : people}}
-        </div>
+        <nav-bar/>
+        <p v-if="isLoading">Loading..</p>
+        <router-view v-else/>
     </div>
 </template>
 
 
 <script>
-  import { db } from './main'
+  import NavBar         from './modules/navbar/NavBar'
+  import { fb }         from './main'
+  import { mapActions } from 'vuex'
+
+  const loadingDelay = 2000
 
   export default {
-    name: 'app',
-    data: () => ({
-      people : null,
-      loading: true
-    }),
-    created() {
-      // this unbinds any previously bound reference
-      this.$bind('people', db.collection('people')).then(() => {
-        // this.todos = todos
-        setTimeout(() => {
-          this.loading = false
-        }, 1000)
+    name      : 'app',
+    components: { NavBar },
+    data() {
+      return {
+        isLoading: true,
+      }
+    },
+    methods   : {
+      ...mapActions([
+        'setCurrentUser'
+      ]),
+      setNotLoadingWithDelay() {
+        setTimeout(() => this.isLoading = false, loadingDelay)
+      },
+      checkUser(user) {
+        if (user) {
+          this.setCurrentUser(user)
+          this.$router.push('/')
+        } else {
+          this.$router.push('/login')
+          this.isLoading = false
+        }
+      }
+    },
+    beforeCreate() {
+      fb.auth().onAuthStateChanged(user => {
+        this.checkUser(user)
+        this.setNotLoadingWithDelay()
       })
     }
   }
-
 </script>
 
 <style>
@@ -38,6 +55,7 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2C3E50;
-        margin-top: 60px;
+        margin-top: 70px;
+        padding: 40px;
     }
 </style>
