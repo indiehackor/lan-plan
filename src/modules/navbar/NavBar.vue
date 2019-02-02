@@ -52,11 +52,11 @@
         border-radius: 5px
         transition: 200ms
         font-size: 16px
-        background: lightslategrey
+        background: transparent
         outline: none
         color: white
         &:hover
-            color: black
+            color: lightslategrey
             background: white
         &:active
             box-shadow: 0 0 5px white
