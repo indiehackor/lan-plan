@@ -32,7 +32,7 @@
       checkUser(user) {
         if (user) {
           this.setCurrentUser(user)
-          this.$router.push('/')
+          this.$router.push('/rank')
         } else {
           this.$router.push('/login')
           this.isLoading = false
