@@ -1,14 +1,14 @@
 import VueRouter from 'vue-router'
 import Login     from './modules/login/Login'
-import Ratings   from './modules/ratings/Ratings'
-import Rate      from './modules/ratings/components/Rate'
+import Main   from './modules/MainView/Main'
+import Rate      from './modules/Rate/Rate'
 import Rank      from './modules/Rank/Rank'
 
 const router = new VueRouter({
   mode  : 'history',
   routes: [
     {
-      path    : '/', component: Ratings,
+      path    : '/', component: Main,
       children: [
         {
           path     : 'rate',
