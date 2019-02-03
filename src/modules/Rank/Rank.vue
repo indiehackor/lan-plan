@@ -2,7 +2,7 @@
     <div>
         <h2>Rankings</h2>
         <div class="list-container">
-            <rank-item v-for="user in users" :key="user.name" :user="user"/>
+            <rank-item v-for="user in users" :key="user.displayName" :user="user"/>
         </div>
     </div>
 </template>
@@ -15,10 +15,10 @@
     data() {
       return {
         users: [
-          { name: 'CrzyDck', stars: 3 },
-          { name: '9do', stars: 1 },
-          { name: 'cmdkeen', stars: 5 },
-          { name: 'Lubricator', stars: 4 }
+          { displayName: 'CrzyDck', stars: 3 },
+          { displayName: '9do', stars: 1 },
+          { displayName: 'cmdkeen', stars: 5 },
+          { displayName: 'Lubricator', stars: 4 }
         ]
       }
     },
