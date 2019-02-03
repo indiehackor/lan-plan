@@ -33,8 +33,13 @@ export function sendResetEmail(email) {
 }
 
 
-export function registerNewUser(email, password) {
+export function registerNewUser(email, password, username) {
   fb.auth().createUserWithEmailAndPassword(email, password)
+    .then(function (user) {
+      user.user.updateProfile({displayName: username, photoURL: null}).catch(function (error) {
+        alert(error)
+      })
+    })
     .catch(function (error) {
       // dispatch error action
       alert(error)

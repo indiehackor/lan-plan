@@ -11,6 +11,17 @@
             v-model="email"
         >
         <label
+            for="username"
+            class="input-label"
+        >Brukernavn</label>
+        <input
+            id="username"
+            type="text"
+            class="login-input"
+            v-model="username"
+            :disabled="!newUser"
+        >
+        <label
             for="password"
             class="input-label"
         >Passord</label>
@@ -60,6 +71,7 @@
       return {
         email         : '',
         password      : '',
+        username      : '',
         forgotPassword: false,
         newUser       : false
       }
@@ -70,7 +82,7 @@
         if (!this.newUser && !this.forgotPassword) {
           login(this.email, this.password)
         } else if (this.newUser && !this.forgotPassword) {
-          registerNewUser(this.email, this.password)
+          registerNewUser(this.email, this.password, this.username)
         } else if (!this.newUser && this.forgotPassword && this.email) {
           sendResetEmail(this.email)
         } else if (this.newUser && this.forgotPassword) {
