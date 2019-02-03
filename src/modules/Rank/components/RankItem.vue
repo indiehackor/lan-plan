@@ -1,6 +1,6 @@
 <template>
     <div class="rank-item">
-        <span class="username">{{user.name}}</span>
+        <span class="username">{{user.displayName}}</span>
         <star :stars="user.stars"/>
     </div>
 </template>
