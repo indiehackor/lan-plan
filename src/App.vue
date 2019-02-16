@@ -12,7 +12,7 @@
   import { fb }         from './main'
   import { mapActions } from 'vuex'
 
-  const loadingDelay = 2000
+  const loadingDelay = 1000
 
   export default {
     name      : 'app',
