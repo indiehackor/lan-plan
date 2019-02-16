@@ -24,11 +24,18 @@
 <style scoped lang="sass">
     .rate-item
         position: relative
+        display: flex
+        justify-content: center
+        align-items: center
+        font-size: 18px
         border: 1px solid black
         border-radius: 2px
         margin-bottom: 10px
+        height: 60px
 
         .buttons
+            box-sizing: border-box
+            padding: 10px
             display: flex
             justify-content: space-between
             position: absolute
@@ -37,9 +44,14 @@
             left: 0
             top: 0
             opacity: 0
+            transition: opacity 300ms
 
             &:hover
                 opacity: 1
     .rate-button
-        width: 100px
+        width: 40px
+        height: 40px
+        background: lightskyblue
+        border-radius: 20px
+
 </style>
