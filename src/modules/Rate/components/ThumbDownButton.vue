@@ -1,6 +1,6 @@
 <template>
     <button class="rate-button">
-        Thumb Down
+        TD
     </button>
 </template>
 

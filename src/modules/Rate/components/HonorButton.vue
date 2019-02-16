@@ -1,6 +1,6 @@
 <template>
     <button class="rate-button">
-        Honor
+        H
     </button>
 </template>
 

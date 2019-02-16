@@ -1,6 +1,6 @@
 <template>
     <button class="rate-button">
-        Star
+        S
     </button>
 </template>
 
