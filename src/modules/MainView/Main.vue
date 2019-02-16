@@ -1,6 +1,6 @@
 <template>
     <div id="ratings">
-        <h1>Welcome to LanPlan {{ displayName }}!</h1>
+        <h1>Welcome to LanPlan {{ user.displayName }}!</h1>
         <tabs/>
         <router-view/>
     </div>
@@ -14,9 +14,7 @@
   export default {
     name      : 'Ratings',
     components: { Tabs },
-    computed  : mapState({
-      displayName: state => state.user ? state.user.displayName : null
-    })
+    computed  : {...mapState(['user'])}
   }
 
 </script>
