@@ -1,4 +1,4 @@
-import { fb } from './main'
+import { fb, db } from './main'
 
 /**
  * Log in to firebase with email and password
@@ -32,13 +32,19 @@ export function sendResetEmail(email) {
   })
 }
 
+export function addNewUserInDatabase({ uid, username, email }) {
+  return db.collection('users').doc(uid).set({
+      username,
+      email,
+      uid
+  })
+}
+
 
 export function registerNewUser(email, password, username) {
   fb.auth().createUserWithEmailAndPassword(email, password)
-    .then(function (user) {
-      user.user.updateProfile({displayName: username, photoURL: null}).catch(function (error) {
-        alert(error)
-      })
+    .then(function ({ user: { uid } }) {
+      return addNewUserInDatabase({ uid, email, username })
     })
     .catch(function (error) {
       // dispatch error action
