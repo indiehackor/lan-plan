@@ -1,11 +1,12 @@
 <template>
     <div class="list-container">
-        <rate-item v-for="user in users" :key="user.displayName" :user="user"/>
+        <rate-item v-for="user in users" :key="user.uid" :user="user"/>
     </div>
 </template>
 
 <script>
   import RateItem from './components/RateItem'
+  import {db}     from '../../main'
 
   export default {
     name      : 'Rate',
@@ -13,12 +14,12 @@
     data() {
       return {
         test : 'lol',
-        users: [
-          { displayName: 'CrzyDck', stars: 3 },
-          { displayName: '9do', stars: 1 },
-          { displayName: 'cmdkeen', stars: 5 },
-          { displayName: 'Lubricator', stars: 4 }
-        ]
+        users: []
+      }
+    },
+    firestore() {
+      return {
+        users: db.collection('users')
       }
     }
   }
