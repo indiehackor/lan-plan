@@ -3,6 +3,7 @@ import VueFire   from 'vuefire'
 import Vuex      from 'vuex'
 import firebase  from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/firestore'
 import VueRouter from 'vue-router'
 import router    from './router'
 import App       from './App.vue'
@@ -21,6 +22,7 @@ const config = {
 
 firebase.initializeApp(config)
 
+export const db = firebase.firestore()
 export const fb = firebase
 
 

@@ -8,8 +8,8 @@
 
 
 <script>
-  import NavBar         from './modules/navbar/NavBar'
-  import { fb }         from './main'
+  import NavBar         from './modules/NavBar/NavBar'
+  import { fb, db }     from './main'
   import { mapActions } from 'vuex'
 
   const loadingDelay = 1000
@@ -20,11 +20,23 @@
     data() {
       return {
         isLoading: true,
+        users: []
       }
+    },
+    firestore() {
+      return {
+        users: db.collection('users')
+      }
+    },
+    beforeCreate() {
+      fb.auth().onAuthStateChanged(user => {
+        this.checkUser(user)
+        this.setNotLoadingWithDelay()
+      })
     },
     methods   : {
       ...mapActions([
-        'setCurrentUser'
+        'setCurrentUser',
       ]),
       setNotLoadingWithDelay() {
         setTimeout(() => this.isLoading = false, loadingDelay)
@@ -38,12 +50,6 @@
           this.isLoading = false
         }
       }
-    },
-    beforeCreate() {
-      fb.auth().onAuthStateChanged(user => {
-        this.checkUser(user)
-        this.setNotLoadingWithDelay()
-      })
     }
   }
 </script>

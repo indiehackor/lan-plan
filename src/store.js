@@ -4,20 +4,17 @@ import { fb } from './main'
 
 Vue.use(Vuex)
 
-const state = {
-  user: null
-}
-
 // GETTERS
 export const currentUser = state => state.user
 
 // ACTIONS
-export const setCurrentUser     = ({ commit }, user) => commit('setUser', { user })
+export const setCurrentUser = ({ commit }, user) => commit('setUser', { user })
+
 export const signOutCurrentUser = ({ commit }) => commit('signOut')
 
 // MUTATIONS
-export function setUser(state, payload) {
-  state.user = payload.user
+export function setUser(state, { user }) {
+  state.user = user
 }
 
 export function signOut(state) {
@@ -29,6 +26,9 @@ export function signOut(state) {
     })
 }
 
+const state = {
+  user: null
+}
 
 export default new Vuex.Store({
   state,
