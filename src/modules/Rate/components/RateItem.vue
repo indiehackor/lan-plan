@@ -34,10 +34,10 @@
         height: 60px
 
         .buttons
-            box-sizing: border-box
-            padding: 10px
+            background: white
             display: flex
-            justify-content: space-between
+            justify-content: center
+            align-items: center
             position: absolute
             width: 100%
             height: 100%
@@ -53,5 +53,6 @@
         height: 40px
         background: lightskyblue
         border-radius: 20px
+        margin: 5px
 
 </style>
