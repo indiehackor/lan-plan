@@ -2,27 +2,41 @@
     <div class="rank-item">
         <span class="username">{{user.username}}</span>
         <star :stars="stars.length"/>
+        <thumb-down :thumbs-down="thumbsDown.length"/>
+        <honor :honors="honours.length"/>
     </div>
 </template>
 
 <script>
-  import Star   from './Star'
-  import { db } from '../../../main'
+  import Star      from './Star'
+  import ThumbDown from './ThumbDown'
+  import Honor     from './Honor'
+  import { db }    from '../../../main'
 
   export default {
     props     : ['user'],
-    components: { Star },
+    components: { Star, Honor, ThumbDown },
     name      : 'RankItem',
     data() {
       return {
-        stars: []
+        stars: [],
+        thumbsDown: [],
+        honours: []
       }
     },
     firestore() {
       return {
         stars: db.collection('users')
           .doc(this.user.uid)
-          .collection('stars')
+          .collection('stars'),
+
+        honours: db.collection('users')
+          .doc(this.user.uid)
+          .collection('honours'),
+
+        thumbsDown: db.collection('users')
+          .doc(this.user.uid)
+          .collection('thumbsDown')
       }
     }
   }
@@ -33,7 +47,11 @@
         display: flex
         justify-content: space-between
         margin-bottom: 10px
+        > *
+            margin-right: 10px
 
-    .username
-        padding: 5px
+        .username
+            padding: 5px
+            text-align: left
+            flex: 1
 </style>

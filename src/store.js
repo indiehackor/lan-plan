@@ -43,7 +43,7 @@ function addStar(state, { uid }) {
 function addHonour(state, { uid }) {
   return db.collection('users')
     .doc(uid)
-    .collection('honors')
+    .collection('honours')
     .add({ comment: 'Veldig hederlig fyr!' })
 }
 function addThumb(state, { uid }) {
