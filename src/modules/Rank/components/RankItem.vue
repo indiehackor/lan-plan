@@ -49,6 +49,7 @@
         margin-bottom: 10px
         > *
             margin-right: 10px
+            min-width: 110px
 
         .username
             padding: 5px
