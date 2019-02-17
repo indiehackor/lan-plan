@@ -2,27 +2,28 @@
     <div>
         <h2>Rankings</h2>
         <div class="list-container">
-            <rank-item v-for="user in users" :key="user.displayName" :user="user"/>
+            <rank-item v-for="user in users" :key="user.uid" :user="user"/>
         </div>
     </div>
 </template>
 
 <script>
   import RankItem from './components/RankItem'
+  import {db}     from '../../main'
 
   export default {
     components: { RankItem },
+    name      : 'Rank',
     data() {
       return {
-        users: [
-          { displayName: 'CrzyDck', stars: 3 },
-          { displayName: '9do', stars: 1 },
-          { displayName: 'cmdkeen', stars: 5 },
-          { displayName: 'Lubricator', stars: 4 }
-        ]
+        users: []
       }
     },
-    name      : 'Rank'
+    firestore() {
+      return {
+        users: db.collection('users')
+      }
+    }
   }
 </script>
 
