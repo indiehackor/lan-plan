@@ -1,8 +1,8 @@
 <template>
     <div class="rate-item">
-        <span>{{user.displayName}}</span>
+        <span>{{user.username}}</span>
         <div class="buttons">
-            <star-button/>
+            <star-button @star-click="handleStarClick"/>
             <honor-button/>
             <thumb-down-button/>
         </div>
@@ -13,11 +13,20 @@
   import HonorButton     from './HonorButton'
   import StarButton      from './StarButton'
   import ThumbDownButton from './ThumbDownButton'
+  import { mapActions }  from 'vuex'
 
   export default {
     components: { HonorButton, StarButton, ThumbDownButton },
     props     : ['user'],
-    name      : 'RateItem'
+    name      : 'RateItem',
+    methods   : {
+      ...mapActions([
+        'giveStar'
+      ]),
+      handleStarClick() {
+        this.giveStar(this.user.uid)
+      }
+    }
   }
 </script>
 
@@ -48,11 +57,12 @@
 
             &:hover
                 opacity: 1
-    .rate-button
-        width: 40px
-        height: 40px
-        background: lightskyblue
-        border-radius: 20px
-        margin: 5px
+
+        .rate-button
+            width: 40px
+            height: 40px
+            background: lightskyblue
+            border-radius: 20px
+            margin: 5px
 
 </style>
