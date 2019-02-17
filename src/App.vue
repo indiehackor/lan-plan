@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <nav-bar/>
-        <p v-if="isLoading">Loading..</p>
+        <p v-if="loading">Loading..</p>
         <router-view v-else/>
     </div>
 </template>
@@ -10,16 +10,14 @@
 <script>
   import NavBar         from './modules/NavBar/NavBar'
   import { fb, db }     from './main'
-  import { mapActions } from 'vuex'
+  import { mapActions, mapState } from 'vuex'
 
-  const loadingDelay = 1000
 
   export default {
     name      : 'app',
     components: { NavBar },
     data() {
       return {
-        isLoading: true,
         users: []
       }
     },
@@ -31,25 +29,24 @@
     beforeCreate() {
       fb.auth().onAuthStateChanged(user => {
         this.checkUser(user)
-        this.setNotLoadingWithDelay()
       })
     },
     methods   : {
       ...mapActions([
         'setCurrentUser',
+        'stopLoading',
       ]),
-      setNotLoadingWithDelay() {
-        setTimeout(() => this.isLoading = false, loadingDelay)
-      },
       checkUser(user) {
         if (user) {
           this.setCurrentUser(user)
-          this.$router.push('/rank')
         } else {
           this.$router.push('/login')
-          this.isLoading = false
         }
+        this.stopLoading()
       }
+    },
+    computed: {
+      ...mapState(['loading'])
     }
   }
 </script>

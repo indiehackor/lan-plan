@@ -11,6 +11,9 @@ export const currentUser = state => state.user
 export const setCurrentUser     = ({ commit }, user) => commit('setUser', { user })
 export const signOutCurrentUser = ({ commit }) => commit('signOut')
 export const giveStar           = ({ commit }, uid) => commit('addStar', { uid })
+export const startLoading       = ({ commit }) => commit('setLoading', true)
+export const stopLoading       = ({ commit }) => commit('setLoading', false)
+
 
 // MUTATIONS
 export function setUser(state, { user }) {
@@ -33,8 +36,14 @@ function addStar(state, { uid }) {
     .add({ comment: 'Veldig bra fyr!' })
 }
 
+function setLoading(state, payload) {
+  state.loading = true
+  setTimeout(()=> state.loading = payload, 1000)
+}
+
 const state = {
-  user: null
+  user: null,
+  loading: true,
 }
 
 export default new Vuex.Store({
@@ -45,11 +54,14 @@ export default new Vuex.Store({
   actions  : {
     setCurrentUser,
     signOutCurrentUser,
-    giveStar
+    giveStar,
+    startLoading,
+    stopLoading
   },
   mutations: {
     setUser,
     signOut,
-    addStar
+    addStar,
+    setLoading
   }
 })
