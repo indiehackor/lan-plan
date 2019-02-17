@@ -17,11 +17,11 @@
     components: { Tabs },
     data() {
       return {
-        userdata: {username: ''}
+        userdata: { username: '' }
       }
     },
     computed  : {
-      ...mapState(['user']),
+      ...mapState(['user'])
     },
     firestore() {
       return {
