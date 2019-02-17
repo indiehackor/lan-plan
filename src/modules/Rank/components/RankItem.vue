@@ -6,11 +6,11 @@
 </template>
 
 <script>
-  import Star from './Star'
-  import {db} from '../../../main'
+  import Star   from './Star'
+  import { db } from '../../../main'
 
   export default {
-    props: ['user'],
+    props     : ['user'],
     components: { Star },
     name      : 'RankItem',
     data() {
@@ -29,10 +29,11 @@
 </script>
 
 <style scoped lang="sass">
-.rank-item
-    display: flex
-    justify-content: space-between
-    margin-bottom: 10px
-.username
-    padding: 5px
+    .rank-item
+        display: flex
+        justify-content: space-between
+        margin-bottom: 10px
+
+    .username
+        padding: 5px
 </style>
