@@ -10,7 +10,11 @@ export const currentUser = state => state.user
 // ACTIONS
 export const setCurrentUser     = ({ commit }, user) => commit('setUser', { user })
 export const signOutCurrentUser = ({ commit }) => commit('signOut')
+
 export const giveStar           = ({ commit }, uid) => commit('addStar', { uid })
+export const giveHonour           = ({ commit }, uid) => commit('addHonour', { uid })
+export const giveThumb           = ({ commit }, uid) => commit('addThumb', { uid })
+
 export const startLoading       = ({ commit }) => commit('setLoading', true)
 export const stopLoading       = ({ commit }) => commit('setLoading', false)
 
@@ -29,11 +33,24 @@ export function signOut(state) {
     })
 }
 
+// These can be redused to one function and one action called addRating etc.
 function addStar(state, { uid }) {
   return db.collection('users')
     .doc(uid)
     .collection('stars')
     .add({ comment: 'Veldig bra fyr!' })
+}
+function addHonour(state, { uid }) {
+  return db.collection('users')
+    .doc(uid)
+    .collection('honors')
+    .add({ comment: 'Veldig hederlig fyr!' })
+}
+function addThumb(state, { uid }) {
+  return db.collection('users')
+    .doc(uid)
+    .collection('thumbsDown')
+    .add({ comment: 'Veldig kjip fyr!' })
 }
 
 function setLoading(state, payload) {
@@ -55,6 +72,8 @@ export default new Vuex.Store({
     setCurrentUser,
     signOutCurrentUser,
     giveStar,
+    giveHonour,
+    giveThumb,
     startLoading,
     stopLoading
   },
@@ -62,6 +81,8 @@ export default new Vuex.Store({
     setUser,
     signOut,
     addStar,
+    addHonour,
+    addThumb,
     setLoading
   }
 })

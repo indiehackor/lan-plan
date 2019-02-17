@@ -3,8 +3,8 @@
         <span>{{user.username}}</span>
         <div class="buttons">
             <star-button @star-click="handleStarClick"/>
-            <honor-button/>
-            <thumb-down-button/>
+            <honor-button @honour-click="handleHonourClick" />
+            <thumb-down-button @thumb-click="handleThumbClick"/>
         </div>
     </div>
 </template>
@@ -21,10 +21,18 @@
     name      : 'RateItem',
     methods   : {
       ...mapActions([
-        'giveStar'
+        'giveStar',
+        'giveHonour',
+        'giveThumb',
       ]),
       handleStarClick() {
         this.giveStar(this.user.uid)
+      },
+      handleThumbClick() {
+        this.giveThumb(this.user.uid)
+      },
+      handleHonourClick() {
+        this.giveHonour(this.user.uid)
       }
     }
   }

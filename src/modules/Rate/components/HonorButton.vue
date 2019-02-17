@@ -1,12 +1,17 @@
 <template>
-    <button class="rate-button">
+    <button @click="handleClick" class="rate-button">
         H
     </button>
 </template>
 
 <script>
   export default {
-    name: 'HonorButton'
+    name: 'HonorButton',
+    methods: {
+      handleClick() {
+        this.$emit('honour-click')
+      }
+    }
   }
 </script>
 
