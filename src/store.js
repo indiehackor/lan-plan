@@ -11,12 +11,12 @@ export const currentUser = state => state.user
 export const setCurrentUser     = ({ commit }, user) => commit('setUser', { user })
 export const signOutCurrentUser = ({ commit }) => commit('signOut')
 
-export const giveStar           = ({ commit }, uid) => commit('addStar', { uid })
-export const giveHonour           = ({ commit }, uid) => commit('addHonour', { uid })
-export const giveThumb           = ({ commit }, uid) => commit('addThumb', { uid })
+export const giveStar   = ({ commit }, uid) => commit('addStar', { uid })
+export const giveHonour = ({ commit }, uid) => commit('addHonour', { uid })
+export const giveThumb  = ({ commit }, uid) => commit('addThumb', { uid })
 
-export const startLoading       = ({ commit }) => commit('setLoading', true)
-export const stopLoading       = ({ commit }) => commit('setLoading', false)
+export const startLoading = ({ commit }) => commit('setLoading', true)
+export const stopLoading  = ({ commit }) => commit('setLoading', false)
 
 
 // MUTATIONS
@@ -40,12 +40,14 @@ function addStar(state, { uid }) {
     .collection('stars')
     .add({ comment: 'Veldig bra fyr!' })
 }
+
 function addHonour(state, { uid }) {
   return db.collection('users')
     .doc(uid)
     .collection('honours')
     .add({ comment: 'Veldig hederlig fyr!' })
 }
+
 function addThumb(state, { uid }) {
   return db.collection('users')
     .doc(uid)
@@ -55,11 +57,11 @@ function addThumb(state, { uid }) {
 
 function setLoading(state, payload) {
   state.loading = true
-  setTimeout(()=> state.loading = payload, 1000)
+  setTimeout(() => state.loading = payload, 1000)
 }
 
 const state = {
-  user: null,
+  user   : null,
   loading: true,
 }
 
