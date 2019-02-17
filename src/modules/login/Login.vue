@@ -1,5 +1,7 @@
 <template lang="html">
     <form class="login-container" @submit="letsGo">
+        <h1>Login</h1>
+
         <label
             for="email"
             class="input-label"
@@ -63,7 +65,8 @@
     login,
     sendResetEmail,
     registerNewUser
-  } from '../../firebaseApi'
+  }                     from '../../firebaseApi'
+  import { mapActions, mapState } from 'vuex'
 
   export default {
     name   : 'Login',
@@ -73,14 +76,23 @@
         password      : '',
         username      : '',
         forgotPassword: false,
-        newUser       : false
+        newUser       : false,
       }
     },
+    computed: {
+      ...mapState(['user'])
+    },
+    created() {
+      if (this.user) this.$router.push('/rank')
+    },
     methods: {
+      ...mapActions(['startLoading']),
       letsGo(e) {
         e.preventDefault()
+        this.startLoading()
         if (!this.newUser && !this.forgotPassword) {
           login(this.email, this.password)
+          this.$router.push('/rank')
         } else if (this.newUser && !this.forgotPassword) {
           registerNewUser(this.email, this.password, this.username)
         } else if (!this.newUser && this.forgotPassword && this.email) {
@@ -94,11 +106,14 @@
 </script>
 
 <style scoped lang="sass">
+    h1
+        text-align: center
+        width: 100%
     .login-container
         display: flex
         flex-direction: column
         width: 300px
-        margin: 50px auto
+        margin: 0 auto
         align-items: flex-start
 
         #login-button
@@ -110,5 +125,4 @@
 
         .input-label
             text-align: left
-
 </style>
