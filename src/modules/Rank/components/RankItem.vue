@@ -3,19 +3,19 @@
         <span class="username">{{user.username}}</span>
         <star :stars="stars.length"/>
         <thumb-down :thumbs-down="thumbsDown.length"/>
-        <honor :honors="honours.length"/>
+        <honour :honors="honours.length"/>
     </div>
 </template>
 
 <script>
   import Star      from './Star'
   import ThumbDown from './ThumbDown'
-  import Honor     from './Honor'
+  import Honour     from './Honour'
   import { db }    from '../../../main'
 
   export default {
     props     : ['user'],
-    components: { Star, Honor, ThumbDown },
+    components: { Star, Honour, ThumbDown },
     name      : 'RankItem',
     data() {
       return {

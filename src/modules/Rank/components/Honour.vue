@@ -7,7 +7,7 @@
 <script>
   export default {
     props: ['honors'],
-    name: 'Honor'
+    name: 'Honour'
   }
 </script>
 
