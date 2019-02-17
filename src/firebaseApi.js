@@ -8,11 +8,7 @@ import { fb, db } from './main'
 export function login(email, password) {
   fb.auth().setPersistence(fb.auth.Auth.Persistence.LOCAL)
     .then(function () {
-      fb.auth().signInWithEmailAndPassword(email, password).then(function () {
-        //nothing
-      }).catch(function (error) {
-        alert(error)
-      })
+      return fb.auth().signInWithEmailAndPassword(email, password)
     })
     .catch(function (error) {
       alert(error)
@@ -24,9 +20,10 @@ export function login(email, password) {
  * @param email
  */
 export function sendResetEmail(email) {
-  fb.auth().sendPasswordResetEmail(email).then(function () {
-    // dispatch email sent action
-  }).catch(function (error) {
+  fb.auth().sendPasswordResetEmail(email)
+    .then(function () {
+      // dispatch email sent action
+    }).catch(function (error) {
     alert(error)
     // dispatch error action.
   })
@@ -34,9 +31,10 @@ export function sendResetEmail(email) {
 
 export function addNewUserInDatabase({ uid, username, email }) {
   return db.collection('users').doc(uid).set({
-      username,
-      email,
-      uid
+    username,
+    email,
+    uid,
+    confirmed: false
   })
 }
 
