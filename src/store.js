@@ -21,7 +21,11 @@ export const stopLoading  = ({ commit }) => commit('setLoading', false)
 
 // MUTATIONS
 export function setUser(state, { user }) {
-  state.user = user
+  db.collection('users').doc(user.uid).get().then((doc) =>{
+    if (doc.exists) {
+      state.user = {...user, ...doc.data()}
+    }
+  })
 }
 
 export function signOut(state) {
@@ -33,7 +37,7 @@ export function signOut(state) {
     })
 }
 
-// These can be redused to one function and one action called addRating etc.
+// These can be reduced to one function and one action called addRating etc.
 function addStar(state, { uid }) {
   return db.collection('users')
     .doc(uid)
