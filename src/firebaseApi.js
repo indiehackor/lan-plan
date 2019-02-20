@@ -50,3 +50,7 @@ export function registerNewUser(email, password, username) {
     })
 
 }
+
+export function confirmUser(uid) {
+  return db.collection('users').doc(uid).set({ confirmed: true }, { merge: true })
+}

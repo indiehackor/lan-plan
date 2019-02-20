@@ -1,6 +1,7 @@
 import Vuex       from 'vuex'
 import Vue        from 'vue'
 import { fb, db } from './main'
+import * as api   from './firebaseApi'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,7 @@ export const currentUser = state => state.user
 
 // ACTIONS
 export const setCurrentUser     = ({ commit }, user) => commit('setUser', { user })
+export const confirmUser        = ({ commit }, uid) => commit('setUserConfirmed', { uid })
 export const signOutCurrentUser = ({ commit }) => commit('signOut')
 
 export const giveStar   = ({ commit }, uid) => commit('addStar', { uid })
@@ -21,11 +23,15 @@ export const stopLoading  = ({ commit }) => commit('setLoading', false)
 
 // MUTATIONS
 export function setUser(state, { user }) {
-  db.collection('users').doc(user.uid).get().then((doc) =>{
+  db.collection('users').doc(user.uid).get().then((doc) => {
     if (doc.exists) {
-      state.user = {...user, ...doc.data()}
+      state.user = { ...user, ...doc.data() }
     }
   })
+}
+
+function setUserConfirmed(state, { uid }) {
+  api.confirmUser(uid)
 }
 
 export function signOut(state) {
@@ -66,7 +72,7 @@ function setLoading(state, payload) {
 
 const state = {
   user   : null,
-  loading: true,
+  loading: true
 }
 
 export default new Vuex.Store({
@@ -77,6 +83,7 @@ export default new Vuex.Store({
   actions  : {
     setCurrentUser,
     signOutCurrentUser,
+    confirmUser,
     giveStar,
     giveHonour,
     giveThumb,
@@ -89,6 +96,7 @@ export default new Vuex.Store({
     addStar,
     addHonour,
     addThumb,
-    setLoading
+    setLoading,
+    setUserConfirmed
   }
 })
