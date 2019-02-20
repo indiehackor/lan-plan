@@ -1,7 +1,7 @@
-import Vuex       from 'vuex'
-import Vue        from 'vue'
-import { fb, db } from './main'
-import * as api   from './firebaseApi'
+import Vuex           from 'vuex'
+import Vue            from 'vue'
+import { fb, db }     from './main'
+import * as api       from './firebaseApi'
 
 Vue.use(Vuex)
 
@@ -16,11 +16,13 @@ export const signOutCurrentUser = ({ commit }) => commit('signOut')
 export const giveStar   = ({ commit }, uid) => commit('addStar', { uid })
 export const giveHonour = ({ commit }, uid) => commit('addHonour', { uid })
 export const giveThumb  = ({ commit }, uid) => commit('addThumb', { uid })
+export const giveRatings = ({commit}) => commit('addRatings')
 
 export const startLoading = ({ commit }) => commit('setLoading', true)
 export const stopLoading  = ({ commit }) => commit('setLoading', false)
 
 
+// TODO Move all firebase stuff to firebaseApi
 // MUTATIONS
 export function setUser(state, { user }) {
   db.collection('users').doc(user.uid).get().then((doc) => {
@@ -65,6 +67,9 @@ function addThumb(state, { uid }) {
     .add({ comment: 'Veldig kjip fyr!' })
 }
 
+function addRatings() {
+  api.addRatings()
+}
 function setLoading(state, payload) {
   state.loading = true
   setTimeout(() => state.loading = payload, 1000)
@@ -88,7 +93,8 @@ export default new Vuex.Store({
     giveHonour,
     giveThumb,
     startLoading,
-    stopLoading
+    stopLoading,
+    giveRatings
   },
   mutations: {
     setUser,
@@ -97,6 +103,7 @@ export default new Vuex.Store({
     addHonour,
     addThumb,
     setLoading,
-    setUserConfirmed
+    setUserConfirmed,
+    addRatings
   }
 })

@@ -5,6 +5,7 @@
         </span>
         <confirm-users-list v-if="admin"/>
         <div>
+            <give-ratings v-if="admin"/>
             <button v-if="email" @click="signOutCurrentUser">
                 Sign out
             </button>
@@ -18,10 +19,11 @@
 <script>
   import { mapState, mapActions } from 'vuex'
   import ConfirmUsersList         from './components/ConfirmUsersList'
+  import GiveRatings from './components/GiveRatings'
 
   export default {
     name      : 'NavBar',
-    components: { ConfirmUsersList },
+    components: { ConfirmUsersList, GiveRatings },
     methods   : {
       ...mapActions([
         'signOutCurrentUser'
@@ -53,7 +55,7 @@
 
         button
             height: 40px
-            width: 100px
+            width: 150px
             border-radius: 5px
             transition: 200ms
             font-size: 16px
