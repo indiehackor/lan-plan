@@ -3,6 +3,7 @@
         <span class="email">
             {{email}}
         </span>
+        <confirm-users-list v-if="admin"/>
         <div>
             <button v-if="email" @click="signOutCurrentUser">
                 Sign out
@@ -16,10 +17,12 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import ConfirmUsersList         from './components/ConfirmUsersList'
 
   export default {
-    name    : 'NavBar',
-    methods : {
+    name      : 'NavBar',
+    components: { ConfirmUsersList },
+    methods   : {
       ...mapActions([
         'signOutCurrentUser'
       ]),
@@ -27,9 +30,10 @@
         this.$router.push('/login')
       }
     },
-    computed: mapState({
-      email: state => state.user ? state.user.email : ""
-    })
+    computed  : mapState({
+      email: state => state.user ? state.user.email : '',
+      admin: state => state.user ? state.user.admin : false
+    }),
   }
 </script>
 
@@ -46,18 +50,21 @@
         left: 0
         right: 0
         font-size: 18px
-    button
-        height: 40px
-        width: 100px
-        border-radius: 5px
-        transition: 200ms
-        font-size: 16px
-        background: transparent
-        outline: none
-        color: white
-        &:hover
-            color: lightslategrey
-            background: white
-        &:active
-            box-shadow: 0 0 5px white
+
+        button
+            height: 40px
+            width: 100px
+            border-radius: 5px
+            transition: 200ms
+            font-size: 16px
+            background: transparent
+            outline: none
+            color: white
+
+            &:hover
+                color: lightslategrey
+                background: white
+
+            &:active
+                box-shadow: 0 0 5px white
 </style>
