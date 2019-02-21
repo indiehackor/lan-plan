@@ -13,7 +13,7 @@
 
 <style scoped lang="sass">
     span
-        border: 1px solid black
+        border: 1px solid white
         border-radius: 2px
         padding: 5px
 </style>
