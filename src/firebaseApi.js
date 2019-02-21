@@ -38,7 +38,6 @@ export function addNewUserInDatabase({ uid, username, email }) {
   })
 }
 
-
 export function registerNewUser(email, password, username) {
   fb.auth().createUserWithEmailAndPassword(email, password)
     .then(function ({ user: { uid } }) {
@@ -55,16 +54,49 @@ export function confirmUser(uid) {
   return db.collection('users').doc(uid).set({ confirmed: true }, { merge: true })
 }
 
-export function addRatings() {
+export function giveMoreRatings() {
   return db.collection('users').get().then((col) => {
     col.forEach(doc => {
       return db.collection('users')
         .doc(doc.data().uid)
         .set({
-          stars: 10,
+          stars     : 10,
           thumbsDown: 5,
-          honours: 5,
+          honours   : 5
         }, { merge: true })
     })
   })
+}
+
+export function addRating(type, uidGive, uidGet) {
+  db.collection('users')
+    .doc(uidGet)
+    .collection(type)
+    .add({ comment: 'Veldig kjip fyr!' })
+    .then(() => {
+      return getUserData(type, uidGive)
+    })
+    .then((doc) => {
+      const newBalance = doc.data()[type] - 1
+      if (newBalance < 0) {
+        console.log(`${doc.data().username} is all out of ${type}`)
+        return
+      }
+      console.log(`Setting ${type} to ${newBalance} for ${doc.data().username}`)
+      return setRatingBalance(type, uidGive, newBalance)
+    })
+    .catch(err => {
+      alert(err)
+    })
+}
+
+export function setRatingBalance(type, uid, newBalance) {
+  return db.collection('users')
+    .doc(uid)
+    .set({ [type]: newBalance }, { merge: true })
+}
+
+function getUserData(type, uid) {
+  return db.collection('users')
+    .doc(uid).get()
 }
