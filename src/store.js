@@ -1,7 +1,7 @@
-import Vuex           from 'vuex'
-import Vue            from 'vue'
-import { fb, db }     from './main'
-import * as api       from './firebaseApi'
+import Vuex       from 'vuex'
+import Vue        from 'vue'
+import { fb, db } from './main'
+import * as api   from './firebaseApi'
 
 Vue.use(Vuex)
 
@@ -13,10 +13,10 @@ export const setCurrentUser     = ({ commit }, user) => commit('setUser', { user
 export const confirmUser        = ({ commit }, uid) => commit('setUserConfirmed', { uid })
 export const signOutCurrentUser = ({ commit }) => commit('signOut')
 
-export const giveStar   = ({ commit }, uid) => commit('addStar', { uid })
-export const giveHonour = ({ commit }, uid) => commit('addHonour', { uid })
-export const giveThumb  = ({ commit }, uid) => commit('addThumb', { uid })
-export const giveRatings = ({commit}) => commit('addRatings')
+export const giveStar    = ({ commit }, uid) => commit('addStar', { uid })
+export const giveHonour  = ({ commit }, uid) => commit('addHonour', { uid })
+export const giveThumb   = ({ commit }, uid) => commit('addThumb', { uid })
+export const giveRatings = ({ commit }) => commit('addRatings')
 
 export const startLoading = ({ commit }) => commit('setLoading', true)
 export const stopLoading  = ({ commit }) => commit('setLoading', false)
@@ -45,31 +45,22 @@ export function signOut(state) {
     })
 }
 
-// These can be reduced to one function and one action called addRating etc.
 function addStar(state, { uid }) {
-  return db.collection('users')
-    .doc(uid)
-    .collection('stars')
-    .add({ comment: 'Veldig bra fyr!' })
+  api.addRating('stars', state.user.uid, uid)
 }
 
 function addHonour(state, { uid }) {
-  return db.collection('users')
-    .doc(uid)
-    .collection('honours')
-    .add({ comment: 'Veldig hederlig fyr!' })
+  api.addRating('honours', state.user.uid, uid)
 }
 
 function addThumb(state, { uid }) {
-  return db.collection('users')
-    .doc(uid)
-    .collection('thumbsDown')
-    .add({ comment: 'Veldig kjip fyr!' })
+  api.addRating('thumbsDown', state.user.uid, uid)
 }
 
 function addRatings() {
-  api.addRatings()
+  api.giveMoreRatings()
 }
+
 function setLoading(state, payload) {
   state.loading = true
   setTimeout(() => state.loading = payload, 1000)
@@ -80,7 +71,7 @@ const state = {
   loading: true
 }
 
-export default new Vuex.Store({
+let store = new Vuex.Store({
   state,
   getters  : {
     currentUser
@@ -107,3 +98,5 @@ export default new Vuex.Store({
     addRatings
   }
 })
+
+export default store
