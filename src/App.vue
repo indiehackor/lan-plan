@@ -68,7 +68,7 @@
         font-weight: 300;
     }
     body {
-        background: linear-gradient(270deg, #46ddb6, #c846dd);
+        background: linear-gradient(270deg, #ea49ab, #2e8edd);
         background-size: 400% 400%;
         animation: AnimationName 60s ease infinite;
         color: white;
