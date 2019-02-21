@@ -29,6 +29,6 @@
 
 <style scoped lang="sass">
 .list-container
-    width: 500px
+    width: 600px
     margin: 10px auto
 </style>
