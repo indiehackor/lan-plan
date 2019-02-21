@@ -62,6 +62,7 @@
             outline: none
             color: white
             border: 1px solid white
+            margin-right: 10px
 
             &:hover
                 color: lightslategrey
