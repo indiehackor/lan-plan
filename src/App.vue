@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <nav-bar/>
+        <modal v-if="modals.includes('confirm')"/>
         <p v-if="loading">Loading..</p>
         <router-view v-else/>
     </div>
@@ -8,24 +9,15 @@
 
 
 <script>
-  import NavBar         from './modules/NavBar/NavBar'
-  import { fb, db }     from './main'
+  import NavBar                   from './modules/NavBar/NavBar'
+  import { fb }                   from './main'
   import { mapActions, mapState } from 'vuex'
+  import Modal                    from './modules/Modal/Modal'
 
 
   export default {
     name      : 'app',
-    components: { NavBar },
-    data() {
-      return {
-        users: []
-      }
-    },
-    firestore() {
-      return {
-        users: db.collection('users')
-      }
-    },
+    components: { NavBar, Modal },
     beforeCreate() {
       fb.auth().onAuthStateChanged(user => {
         this.checkUser(user)
@@ -34,7 +26,7 @@
     methods   : {
       ...mapActions([
         'setCurrentUser',
-        'stopLoading',
+        'stopLoading'
       ]),
       checkUser(user) {
         if (user) {
@@ -45,8 +37,8 @@
         this.stopLoading()
       }
     },
-    computed: {
-      ...mapState(['loading'])
+    computed  : {
+      ...mapState(['loading', 'modals'])
     }
   }
 </script>
@@ -60,6 +52,7 @@
         margin-top: 70px;
         padding: 40px;
     }
+
     h1 {
         font-size: 40px;
         text-transform: uppercase;
@@ -67,15 +60,23 @@
         letter-spacing: 3px;
         font-weight: 300;
     }
+
     body {
-        background: linear-gradient(270deg, #ea49ab, #2e8edd);
+        background: linear-gradient(270deg, #EA49AB, #2E8EDD);
         background-size: 400% 400%;
         animation: AnimationName 60s ease infinite;
         color: white;
     }
+
     @keyframes AnimationName {
-        0%{background-position:0 50%}
-        50%{background-position:100% 50%}
-        100%{background-position:0 50%}
+        0% {
+            background-position: 0 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0 50%
+        }
     }
 </style>

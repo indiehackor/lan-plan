@@ -21,6 +21,9 @@ export const giveRatings = ({ commit }) => commit('addRatings')
 export const startLoading = ({ commit }) => commit('setLoading', true)
 export const stopLoading  = ({ commit }) => commit('setLoading', false)
 
+export const showModal = ({commit}, name) => commit('openModal', {name})
+export const hideModal = ({commit}, name) => commit('closeModal', {name})
+
 
 // TODO Move all firebase stuff to firebaseApi
 // MUTATIONS
@@ -66,9 +69,18 @@ function setLoading(state, payload) {
   setTimeout(() => state.loading = payload, 1000)
 }
 
+function openModal(state, {name}) {
+  state.modals.push(name)
+}
+
+function closeModal(state, {name}) {
+state.modals = state.modals.filter(modal => modal !== name)
+}
+
 const state = {
   user   : null,
-  loading: true
+  loading: true,
+  modals: [],
 }
 
 let store = new Vuex.Store({
@@ -80,6 +92,8 @@ let store = new Vuex.Store({
     setCurrentUser,
     signOutCurrentUser,
     confirmUser,
+    showModal,
+    hideModal,
     giveStar,
     giveHonour,
     giveThumb,
@@ -88,6 +102,8 @@ let store = new Vuex.Store({
     giveRatings
   },
   mutations: {
+    closeModal,
+    openModal,
     setUser,
     signOut,
     addStar,
