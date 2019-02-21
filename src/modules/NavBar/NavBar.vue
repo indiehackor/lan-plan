@@ -42,7 +42,6 @@
 <style lang="sass" scoped>
     #nav-bar
         height: 70px
-        background: lightslategrey
         position: absolute
         display: flex
         justify-content: space-between
@@ -62,11 +61,9 @@
             background: transparent
             outline: none
             color: white
+            border: 1px solid white
 
             &:hover
                 color: lightslategrey
                 background: white
-
-            &:active
-                box-shadow: 0 0 5px white
 </style>
