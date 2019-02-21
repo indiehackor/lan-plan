@@ -53,12 +53,29 @@
 
 <style>
     #app {
-        font-family: "Avenir", Helvetica, Arial, sans-serif;
+        font-family: 'Muli', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2C3E50;
         margin-top: 70px;
         padding: 40px;
+    }
+    h1 {
+        font-size: 40px;
+        text-transform: uppercase;
+        line-height: .8;
+        letter-spacing: 3px;
+        font-weight: 300;
+    }
+    body {
+        background: linear-gradient(270deg, #46ddb6, #c846dd);
+        background-size: 400% 400%;
+        animation: AnimationName 60s ease infinite;
+        color: white;
+    }
+    @keyframes AnimationName {
+        0%{background-position:0 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0 50%}
     }
 </style>
