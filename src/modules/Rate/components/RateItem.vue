@@ -2,18 +2,24 @@
     <div class="rate-item">
         <span>{{user.username}}</span>
         <div class="buttons">
-            <star-button @star-click="handleStarClick"/>
-            <honor-button @honour-click="handleHonourClick" />
-            <thumb-down-button @thumb-click="handleThumbClick"/>
+            <star-button
+                @star-click="handleStarClick"
+            />
+            <honor-button
+                @honour-click="handleHonourClick"
+            />
+            <thumb-down-button
+                @thumb-click="handleThumbClick"
+            />
         </div>
     </div>
 </template>
 
 <script>
-  import HonorButton     from './HonorButton'
-  import StarButton      from './StarButton'
-  import ThumbDownButton from './ThumbDownButton'
-  import { mapActions }  from 'vuex'
+  import HonorButton              from './HonorButton'
+  import StarButton               from './StarButton'
+  import ThumbDownButton          from './ThumbDownButton'
+  import { mapActions, mapState } from 'vuex'
 
   export default {
     components: { HonorButton, StarButton, ThumbDownButton },
@@ -22,8 +28,8 @@
     methods   : {
       ...mapActions([
         'giveStar',
-        'giveHonour',
         'giveThumb',
+        'giveHonour'
       ]),
       handleStarClick() {
         this.giveStar(this.user.uid)
@@ -45,7 +51,7 @@
         justify-content: center
         align-items: center
         font-size: 18px
-        border: 1px solid black
+        border: 1px solid white
         border-radius: 2px
         margin-bottom: 10px
         height: 60px
