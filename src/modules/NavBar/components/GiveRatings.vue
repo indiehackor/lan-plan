@@ -8,9 +8,9 @@
   export default {
     name: 'GiveRatings',
     methods: {
-      ...mapActions(['giveRatings']),
+      ...mapActions(['renewRatingCount']),
       handleClick() {
-        this.giveRatings()
+        this.renewRatingCount()
       }
     }
   }
