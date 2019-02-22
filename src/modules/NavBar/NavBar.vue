@@ -35,7 +35,7 @@
     computed  : mapState({
       email: state => state.user ? state.user.email : '',
       admin: state => state.user ? state.user.admin : false
-    }),
+    })
   }
 </script>
 
@@ -55,7 +55,7 @@
         button
             height: 40px
             width: 150px
-            border-radius: 5px
+            border-radius: 2px
             transition: 200ms
             font-size: 16px
             background: transparent
