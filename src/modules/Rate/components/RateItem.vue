@@ -16,10 +16,10 @@
 </template>
 
 <script>
-  import HonorButton              from './HonorButton'
-  import StarButton               from './StarButton'
-  import ThumbDownButton          from './ThumbDownButton'
-  import { mapActions, mapState } from 'vuex'
+  import HonorButton     from './HonorButton'
+  import StarButton      from './StarButton'
+  import ThumbDownButton from './ThumbDownButton'
+  import { mapActions }  from 'vuex'
 
   export default {
     components: { HonorButton, StarButton, ThumbDownButton },
@@ -55,9 +55,12 @@
         border-radius: 2px
         margin-bottom: 10px
         height: 60px
+        transition: color 300ms
+        &:hover
+            color: transparent
 
         .buttons
-            background: white
+            //background: white
             display: flex
             justify-content: center
             align-items: center
@@ -75,8 +78,20 @@
         .rate-button
             width: 40px
             height: 40px
-            background: lightskyblue
+            background: transparent
             border-radius: 20px
+            color: white
+            border: 1px solid white
             margin: 5px
+            outline: none
+            &:focus
+                animation: button-background 300ms ease-out
+
+    @keyframes button-background
+        0%
+            background: white
+        100%
+            background: transparent
+
 
 </style>
