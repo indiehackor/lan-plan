@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <nav-bar/>
-        <modal v-if="modals.includes('confirm')"/>
+        <modal/>
         <p v-if="loading">Loading..</p>
         <router-view v-else/>
     </div>
@@ -38,7 +38,7 @@
       }
     },
     computed  : {
-      ...mapState(['loading', 'modals'])
+      ...mapState(['loading'])
     }
   }
 </script>
@@ -53,12 +53,21 @@
         padding: 40px;
     }
 
-    h1 {
-        font-size: 40px;
+    h1, h2 {
         text-transform: uppercase;
         line-height: .8;
-        letter-spacing: 3px;
+    }
+
+    h1 {
+        font-size: 40px;
+        font-weight: 200;
+        letter-spacing: 4px;
+    }
+
+    h2 {
+        font-size: 20px;
         font-weight: 300;
+        letter-spacing: 2px;
     }
 
     body {
