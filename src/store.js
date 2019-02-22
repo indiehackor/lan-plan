@@ -16,13 +16,14 @@ export const signOutCurrentUser = ({ commit }) => commit('signOut')
 export const giveStar    = ({ commit }, uid) => commit('addStar', { uid })
 export const giveHonour  = ({ commit }, uid) => commit('addHonour', { uid })
 export const giveThumb   = ({ commit }, uid) => commit('addThumb', { uid })
-export const giveRatings = ({ commit }) => commit('addRatings')
+
+export const renewRatingCount = ({ commit }) => commit('addRatings')
 
 export const startLoading = ({ commit }) => commit('setLoading', true)
 export const stopLoading  = ({ commit }) => commit('setLoading', false)
 
-export const showModal = ({commit}, name) => commit('openModal', {name})
-export const hideModal = ({commit}, name) => commit('closeModal', {name})
+export const showModal = ({commit}, {username, uid, type}) => commit('openModal', {username, uid, type})
+export const hideModal = ({commit}) => commit('closeModal')
 
 
 // TODO Move all firebase stuff to firebaseApi
@@ -69,18 +70,30 @@ function setLoading(state, payload) {
   setTimeout(() => state.loading = payload, 1000)
 }
 
-function openModal(state, {name}) {
-  state.modals.push(name)
+function openModal(state, {username, uid, type}) {
+  state.modals.confirmModal = {
+    open: true,
+    username,
+    type,
+    uid
+  }
 }
 
-function closeModal(state, {name}) {
-state.modals = state.modals.filter(modal => modal !== name)
+function closeModal(state) {
+  state.modals.confirmModal = {
+    open: false
+  }
 }
 
 const state = {
   user   : null,
   loading: true,
-  modals: [],
+  modals: {
+    confirmModal: {
+      open: false,
+
+    },
+  },
 }
 
 let store = new Vuex.Store({
@@ -99,7 +112,7 @@ let store = new Vuex.Store({
     giveThumb,
     startLoading,
     stopLoading,
-    giveRatings
+    renewRatingCount
   },
   mutations: {
     closeModal,
