@@ -16,32 +16,35 @@
 </template>
 
 <script>
-  import HonorButton     from './HonorButton'
-  import StarButton      from './StarButton'
-  import ThumbDownButton from './ThumbDownButton'
-  import { mapActions }  from 'vuex'
+import HonorButton from "./HonorButton";
+import StarButton from "./StarButton";
+import ThumbDownButton from "./ThumbDownButton";
+import { mapActions } from "vuex";
 
-  export default {
-    components: { HonorButton, StarButton, ThumbDownButton },
-    props     : ['user'],
-    name      : 'RateItem',
-    methods   : {
-      ...mapActions([
-        'giveStar',
-        'giveThumb',
-        'giveHonour'
-      ]),
-      handleStarClick() {
-        this.giveStar(this.user.uid)
-      },
-      handleThumbClick() {
-        this.giveThumb(this.user.uid)
-      },
-      handleHonourClick() {
-        this.giveHonour(this.user.uid)
-      }
+export default {
+  components: { HonorButton, StarButton, ThumbDownButton },
+  props: ["user"],
+  name: "RateItem",
+  methods: {
+    ...mapActions(["showModal"]),
+    handleThumbClick() {
+      this.openModal("thumbDown");
+    },
+    handleHonourClick() {
+      this.openModal("honour");
+    },
+    handleStarClick() {
+      this.openModal("star");
+    },
+    openModal(type) {
+      this.showModal({
+        username: this.user.username,
+        uid: this.user.uid,
+        type: type
+      });
     }
   }
+};
 </script>
 
 <style scoped lang="sass">
