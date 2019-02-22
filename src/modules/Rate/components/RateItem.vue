@@ -60,7 +60,6 @@
             color: transparent
 
         .buttons
-            //background: white
             display: flex
             justify-content: center
             align-items: center
