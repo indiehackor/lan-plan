@@ -2,7 +2,7 @@
     <div>
         <h2>Rankings</h2>
         <div class="list-container">
-            <rank-item v-for="user in users" :key="user.username" :user="user"/>
+            <rank-item v-for="user in users" :key="user.uid" :user="user"/>
         </div>
     </div>
 </template>
