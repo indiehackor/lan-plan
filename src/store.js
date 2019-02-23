@@ -56,15 +56,36 @@ export function signOut(state) {
 }
 
 function addStar(state, payload) {
-  api.addRating('stars', state.user.uid, {...payload, author: state.user.username})
+  api.addRating(
+    'stars',
+    state.user.uid,
+    {
+      ...payload,
+      author: state.user.username,
+      remaining: state.user['stars']
+    })
 }
 
 function addHonour(state, payload) {
-  api.addRating('honours', state.user.uid, {...payload, author: state.user.username})
+  api.addRating(
+    'honours',
+    state.user.uid,
+    {
+      ...payload,
+      author: state.user.username,
+      remaining: state.user['honours']
+    })
 }
 
 function addThumb(state, payload) {
-  api.addRating('thumbsDown', state.user.uid, {...payload, author: state.user.username})
+  api.addRating(
+    'thumbsDown',
+    state.user.uid,
+    {
+      ...payload,
+      author: state.user.username,
+      remaining: state.user['thumbsDown']
+    })
 }
 
 function addRatings() {

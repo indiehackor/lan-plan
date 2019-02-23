@@ -106,27 +106,31 @@ export function giveMoreRatings() {
 }
 
 export function addRating(type, uidGive, payload) {
-  db.collection('users')
-    .doc(payload.uid)
-    .collection(type)
-    .add({ comment: payload.comment, author: payload.author })
-    .then(() => {
-      return getUserData(type, uidGive)
-    })
-    .then((doc) => {
-      const newBalance = doc.data()[type] - 1
-      if (newBalance < 0) {
-        console.log(`${doc.data().username} is all out of ${type}`)
-        // TODO Legg til action som vise feilmelding
-        return
-      }
-      console.log(`Setting ${type} to ${newBalance} for ${doc.data().username}`)
-      // TODO Legg til action som viser info melding om hvor mange stjerner du har igjen
-      return setRatingBalance(type, uidGive, newBalance)
-    })
-    .catch(err => {
-      alert(err)
-    })
+  if (payload.remaining) {
+    db.collection('users')
+      .doc(payload.uid)
+      .collection(type)
+      .add({ comment: payload.comment, author: payload.author })
+      .then(() => {
+        return getUserData(type, uidGive)
+      })
+      .then((doc) => {
+        const newBalance = doc.data()[type] - 1
+        if (newBalance < 0) {
+          console.log(`${doc.data().username} is all out of ${type}`)
+          // TODO Legg til action som vise feilmelding
+          return
+        }
+        console.log(`Setting ${type} to ${newBalance} for ${doc.data().username}`)
+        // TODO Legg til action som viser info melding om hvor mange stjerner du har igjen
+        return setRatingBalance(type, uidGive, newBalance)
+      })
+      .catch(err => {
+        alert(err)
+      })
+  } else {
+    alert("Ånei du!")
+  }
 }
 
 export function setRatingBalance(type, uid, newBalance) {
