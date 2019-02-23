@@ -29,9 +29,11 @@ export const hideModal = ({ commit }) => commit('closeModal')
 // TODO Move all firebase stuff to firebaseApi
 // MUTATIONS
 export function setUser(state, { user }) {
-  db.collection('users').doc(user.uid).get().then((doc) => {
-    if (doc.exists) {
-      state.user = { ...user, ...doc.data() }
+  db.collection('users').doc(user.uid).get().then((user) => {
+    if (user.exists && user.data().confirmed) {
+      state.user = { ...user, ...user.data() }
+    } else {
+      state.user = null
     }
   })
 }
