@@ -1,6 +1,6 @@
 <template>
     <div id="ratings">
-        <h1>Welcome to LanPlan{{ ` ${user.username}` }}!</h1>
+        <h1>Velkommen til LanPlan{{ ` ${user.username}` }}!</h1>
         <tabs/>
         <router-view/>
     </div>
