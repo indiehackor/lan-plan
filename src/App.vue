@@ -24,10 +24,7 @@
       })
     },
     methods   : {
-      ...mapActions([
-        'setCurrentUser',
-        'stopLoading'
-      ]),
+      ...mapActions(['setCurrentUser', 'stopLoading']),
       checkUser(user) {
         if (user) {
           this.setCurrentUser(user)
@@ -48,7 +45,7 @@
 
 <style>
     #app {
-        font-family: 'Muli', sans-serif;
+        font-family: "Muli", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
@@ -56,9 +53,10 @@
         padding: 40px;
     }
 
-    h1, h2 {
+    h1,
+    h2 {
         text-transform: uppercase;
-        line-height: .8;
+        line-height: 0.8;
     }
 
     h1 {
@@ -82,13 +80,13 @@
 
     @keyframes AnimationName {
         0% {
-            background-position: 0 50%
+            background-position: 0 50%;
         }
         50% {
-            background-position: 100% 50%
+            background-position: 100% 50%;
         }
         100% {
-            background-position: 0 50%
+            background-position: 0 50%;
         }
     }
 </style>
