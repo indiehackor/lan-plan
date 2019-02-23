@@ -11,13 +11,29 @@ export function populateUsersArray() {
 
       Promise.all(userPromises).then(snapshots => {
         const arrUser = {
+          ...user.data(),
           stars: snapshots[0].docs.length,
           honours: snapshots[1].docs.length,
           thumbsDown: snapshots[2].docs.length,
-          ...user.data()
         }
         store.commit('addUserToArray', arrUser)
       })
+    })
+  })
+}
+
+export function listenForRateUpdates(uid) {
+  setListener(uid, 'stars')
+  setListener(uid, 'honours')
+  setListener(uid, 'thumbsDown')
+}
+
+function setListener(uid, type) {
+  db.collection("users").doc(uid).collection(type).onSnapshot(result => {
+    // console.log(`${type} ${result.size}`)
+    store.commit('updateRating', {
+      [type]: result.size,
+      uid
     })
   })
 }
