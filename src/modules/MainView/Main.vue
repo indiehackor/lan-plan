@@ -1,9 +1,6 @@
 <template>
     <div id="ratings">
         <h1>Velkommen til LanPlan{{ ` ${user.username}` }}!</h1>
-        <star/>
-        <thumb-down/>
-        <honour/>
         <tabs/>
         <router-view/>
     </div>
@@ -19,7 +16,7 @@
 
   export default {
     name      : 'Ratings',
-    components: { ThumbDown, Star, Tabs, Honour },
+    components: { Tabs },
     computed  : {
       ...mapState(['user', 'users'])
     }
