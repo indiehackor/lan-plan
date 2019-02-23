@@ -13,17 +13,17 @@ export const setCurrentUser     = ({ commit }, user) => commit('setUser', { user
 export const confirmUser        = ({ commit }, uid) => commit('setUserConfirmed', { uid })
 export const signOutCurrentUser = ({ commit }) => commit('signOut')
 
-export const giveStar    = ({ commit }, uid) => commit('addStar', { uid })
-export const giveHonour  = ({ commit }, uid) => commit('addHonour', { uid })
-export const giveThumb   = ({ commit }, uid) => commit('addThumb', { uid })
+export const giveStar   = ({ commit }, uid) => commit('addStar', { uid })
+export const giveHonour = ({ commit }, uid) => commit('addHonour', { uid })
+export const giveThumb  = ({ commit }, uid) => commit('addThumb', { uid })
 
 export const renewRatingCount = ({ commit }) => commit('addRatings')
 
 export const startLoading = ({ commit }) => commit('setLoading', true)
 export const stopLoading  = ({ commit }) => commit('setLoading', false)
 
-export const showModal = ({commit}, {username, uid, type}) => commit('openModal', {username, uid, type})
-export const hideModal = ({commit}) => commit('closeModal')
+export const showModal = ({ commit }, { username, uid, type }) => commit('openModal', { username, uid, type })
+export const hideModal = ({ commit }) => commit('closeModal')
 
 
 // TODO Move all firebase stuff to firebaseApi
@@ -34,6 +34,10 @@ export function setUser(state, { user }) {
       state.user = { ...user, ...doc.data() }
     }
   })
+}
+
+export function addUserToArray(state, user) {
+  this.state.users.push(user)
 }
 
 function setUserConfirmed(state, { uid }) {
@@ -70,7 +74,7 @@ function setLoading(state, payload) {
   setTimeout(() => state.loading = payload, 1000)
 }
 
-function openModal(state, {username, uid, type}) {
+function openModal(state, { username, uid, type }) {
   state.modals.confirmModal = {
     open: true,
     username,
@@ -86,14 +90,14 @@ function closeModal(state) {
 }
 
 const state = {
-  user   : null,
-  loading: true,
-  modals: {
+  user       : null,
+  loading    : true,
+  modals     : {
     confirmModal: {
-      open: false,
-
-    },
+      open: false
+    }
   },
+  users: [],
 }
 
 let store = new Vuex.Store({
@@ -124,7 +128,8 @@ let store = new Vuex.Store({
     addThumb,
     setLoading,
     setUserConfirmed,
-    addRatings
+    addRatings,
+    addUserToArray
   }
 })
 
