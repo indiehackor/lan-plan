@@ -5,22 +5,14 @@
 </template>
 
 <script>
-  import RateItem from './components/RateItem'
-  import {db}     from '../../main'
+  import RateItem     from './components/RateItem'
+  import { mapState } from 'vuex'
 
   export default {
     name      : 'Rate',
     components: { RateItem },
-    data() {
-      return {
-        test : 'lol',
-        users: []
-      }
-    },
-    firestore() {
-      return {
-        users: db.collection('users')
-      }
+    computed: {
+      ...mapState(['users'])
     }
   }
 </script>
