@@ -8,7 +8,7 @@
                     <h1>Er du sikker?</h1>
                 </header>
                 <main>
-                    <h2>Gi en stjerne til {{modals.confirmModal.username}}</h2>
+                    <h2>Gi en {{ratingType}} til {{modals.confirmModal.username}}</h2>
                     <label for="comment">Frivillig kommentar</label>
                     <textarea v-model="comment" id="comment"></textarea>
                 </main>
@@ -52,15 +52,24 @@ export default {
       let uid = this.modals.confirmModal.uid;
       switch (this.modals.confirmModal.type) {
         case "star":
-          this.giveStar(uid);
+          this.giveStar({
+            uid,
+            comment: this.comment,
+          });
           this.hideModal();
           break;
         case "honour":
-          this.giveHonour(uid);
+          this.giveHonour({
+            uid,
+            comment: this.comment,
+          });
           this.hideModal();
           break;
         case "thumbDown":
-          this.giveThumb(uid);
+          this.giveThumb({
+            uid,
+            comment: this.comment,
+          });
           this.hideModal();
           break;
       }
@@ -70,7 +79,19 @@ export default {
     }
   },
   computed: {
-    ...mapState(["modals"])
+    ...mapState(["modals"]),
+    ratingType() {
+      switch (this.modals.confirmModal.type) {
+        case "star":
+          return "Stjerne"
+        case "honour":
+          return "Honour"
+        case "thumbDown":
+          return "Tommel Ned"
+        default:
+          return 'error'
+      }
+    }
   },
   created: function() {
     window.addEventListener("keyup", this.handleOverlayClick);

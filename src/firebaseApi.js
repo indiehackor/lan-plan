@@ -105,11 +105,11 @@ export function giveMoreRatings() {
   })
 }
 
-export function addRating(type, uidGive, uidGet) {
+export function addRating(type, uidGive, payload) {
   db.collection('users')
-    .doc(uidGet)
+    .doc(payload.uid)
     .collection(type)
-    .add({ comment: 'Veldig kjip fyr!' })
+    .add({ comment: payload.comment, author: payload.author })
     .then(() => {
       return getUserData(type, uidGive)
     })

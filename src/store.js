@@ -13,9 +13,9 @@ export const setCurrentUser     = ({ commit }, user) => commit('setUser', { user
 export const confirmUser        = ({ commit }, uid) => commit('setUserConfirmed', { uid })
 export const signOutCurrentUser = ({ commit }) => commit('signOut')
 
-export const giveStar   = ({ commit }, uid) => commit('addStar', { uid })
-export const giveHonour = ({ commit }, uid) => commit('addHonour', { uid })
-export const giveThumb  = ({ commit }, uid) => commit('addThumb', { uid })
+export const giveStar   = ({ commit }, payload) => commit('addStar', payload)
+export const giveHonour = ({ commit }, payload) => commit('addHonour', payload)
+export const giveThumb  = ({ commit }, payload) => commit('addThumb', payload)
 
 export const renewRatingCount = ({ commit }) => commit('addRatings')
 
@@ -55,16 +55,16 @@ export function signOut(state) {
     })
 }
 
-function addStar(state, { uid }) {
-  api.addRating('stars', state.user.uid, uid)
+function addStar(state, payload) {
+  api.addRating('stars', state.user.uid, {...payload, author: state.user.username})
 }
 
-function addHonour(state, { uid }) {
-  api.addRating('honours', state.user.uid, uid)
+function addHonour(state, payload) {
+  api.addRating('honours', state.user.uid, {...payload, author: state.user.username})
 }
 
-function addThumb(state, { uid }) {
-  api.addRating('thumbsDown', state.user.uid, uid)
+function addThumb(state, payload) {
+  api.addRating('thumbsDown', state.user.uid, {...payload, author: state.user.username})
 }
 
 function addRatings() {
