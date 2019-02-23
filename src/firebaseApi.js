@@ -1,4 +1,29 @@
 import { fb, db } from './main'
+import store      from './store'
+
+export function populateUsersArray() {
+  return db.collection('users').get().then(data => {
+    data.docs.forEach(user => {
+      const userPromises = []
+      userPromises.push(user.ref.collection('stars').get())
+      userPromises.push(user.ref.collection('honours').get())
+      userPromises.push(user.ref.collection('thumbsDown').get())
+
+      Promise.all(userPromises).then(snapshots => {
+        const arrUser = {
+          username: user.data().username,
+          stars: snapshots[0].docs.length,
+          honours: snapshots[1].docs.length,
+          thumbsDown: snapshots[2].docs.length
+        }
+        store.commit('addUserToArray', arrUser)
+      })
+    })
+  })
+}
+
+// TODO Make function that populates state with users and their current rating.
+
 
 /**
  * Log in to firebase with email and password
