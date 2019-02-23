@@ -1,12 +1,14 @@
 <template>
     <button :disabled="disabled" @click="handleClick" class="rate-button">
-        H
+        <honour/>
     </button>
 </template>
 
 <script>
+  import Honour from '../../../components/icons/Honour'
   export default {
     name: 'HonorButton',
+    components: { Honour },
     props: ['disabled'],
     methods: {
       handleClick() {

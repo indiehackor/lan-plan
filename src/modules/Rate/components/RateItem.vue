@@ -53,11 +53,11 @@ export default {
         display: flex
         justify-content: center
         align-items: center
-        font-size: 18px
+        font-size: 20px
         border: 1px solid white
         border-radius: 2px
         margin-bottom: 10px
-        height: 60px
+        height: 80px
         transition: color 300ms
         &:hover
             color: transparent
@@ -78,12 +78,13 @@ export default {
                 opacity: 1
 
         .rate-button
-            width: 40px
-            height: 40px
+            width: 50px
+            height: 50px
+            border-radius: 25px
             background: transparent
-            border-radius: 20px
             color: white
             border: 1px solid white
+            padding: 0
             margin: 5px
             outline: none
             &:focus
