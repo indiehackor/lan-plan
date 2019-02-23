@@ -57,6 +57,7 @@ export default {
             comment: this.comment,
           });
           this.hideModal();
+          this.comment = ''
           break;
         case "honour":
           this.giveHonour({
@@ -64,6 +65,7 @@ export default {
             comment: this.comment,
           });
           this.hideModal();
+          this.comment = ''
           break;
         case "thumbDown":
           this.giveThumb({
@@ -71,6 +73,7 @@ export default {
             comment: this.comment,
           });
           this.hideModal();
+          this.comment = ''
           break;
       }
     },
