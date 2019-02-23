@@ -69,6 +69,15 @@ function addRatings() {
   api.giveMoreRatings()
 }
 
+function updateRating(state, payload) {
+  const index = state.users.findIndex(user => user.uid === payload.uid)
+  const updatedUser = {...state.users[index], ...payload}
+  state.users = [
+    ...state.users.filter(user => user.uid !== payload.uid),
+    updatedUser
+  ]
+}
+
 function setLoading(state, payload) {
   state.loading = true
   setTimeout(() => state.loading = payload, 1000)
@@ -129,7 +138,8 @@ let store = new Vuex.Store({
     setLoading,
     setUserConfirmed,
     addRatings,
-    addUserToArray
+    addUserToArray,
+    updateRating
   }
 })
 
