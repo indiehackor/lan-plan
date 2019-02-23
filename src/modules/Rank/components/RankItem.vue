@@ -27,14 +27,17 @@
     .rank-item
         display: flex
         justify-content: space-between
+        align-items: center
         margin-bottom: 10px
         > *
-            margin-right: 10px
-            min-width: 110px
+            margin-right: 20px
+            min-width: 50px
+            height: 30px
         .me
             font-weight: 700
 
         .username
+            font-size: 18px
             padding: 5px
             text-align: left
             flex: 1
