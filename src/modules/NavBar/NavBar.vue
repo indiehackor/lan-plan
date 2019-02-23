@@ -7,7 +7,7 @@
         <div>
             <give-ratings v-if="admin"/>
             <button v-if="email" @click="signOutCurrentUser">
-                Sign out
+                Logg ut
             </button>
         </div>
     </div>
