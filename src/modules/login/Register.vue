@@ -1,6 +1,6 @@
 <template lang="html">
-    <form class="login-container" @submit="letsGo">
-        <h1>Login</h1>
+    <form class="register-container" @submit="register">
+        <h1>Registrer</h1>
 
         <label
             for="email"
@@ -9,8 +9,18 @@
         <input
             id="email"
             type="email"
-            class="login-input"
+            class="register-input"
             v-model="email"
+        >
+        <label
+            for="username"
+            class="input-label"
+        >Brukernavn</label>
+        <input
+            id="username"
+            type="text"
+            class="register-input"
+            v-model="username"
         >
         <label
             for="password"
@@ -19,44 +29,32 @@
         <input
             id="password"
             type="password"
-            class="login-input"
+            class="register-input"
             v-model="password"
         >
-        <span>
-            <input
-                id="forgotten-password"
-                type="checkbox"
-                v-model="forgotPassword"
-            >
-            <label for="forgotten-password">
-                Glemt passord
-            </label>
-        </span>
         <section>
-            <router-link class="register-link" to="/register">
-                Registrer
+            <router-link class="register-link" to="/login">
+                Logg inn
             </router-link>
             <button
-                id="login-button"
-            >Logg inn
+                id="register-button"
+            >Registrer!
             </button>
         </section>
     </form>
 </template>
 
 <script>
-import { login, sendResetEmail } from "../../firebaseApi";
+import { registerNewUser } from "../../firebaseApi";
 import { mapActions, mapState } from "vuex";
 
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
       email: "",
       password: "",
       username: "",
-      forgotPassword: false,
-      newUser: false
     };
   },
   computed: {
@@ -67,15 +65,10 @@ export default {
   },
   methods: {
     ...mapActions(["startLoading"]),
-    letsGo(e) {
+    register(e) {
       e.preventDefault();
       this.startLoading();
-      if (!this.forgotPassword) {
-        login(this.email, this.password);
-        this.$router.push("/rank");
-      } else {
-        sendResetEmail(this.email);
-      }
+      registerNewUser(this.email, this.password, this.username);
     }
   }
 };
@@ -108,18 +101,18 @@ export default {
     h1
         text-align: center
         width: 100%
-    .login-container
+    .register-container
         display: flex
         flex-direction: column
         width: 300px
         margin: 0 auto
         align-items: flex-start
 
-        #login-button
+        #register-button
             margin: 10px 0
             width: 100px
 
-        .login-input
+        .register-input
             box-sizing: border-box
             width: 100%
             height: 40px
