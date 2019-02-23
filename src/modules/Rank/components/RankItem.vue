@@ -1,9 +1,9 @@
 <template>
     <div class="rank-item">
         <span class="username">{{user.username}}</span>
-        <star :stars="stars.length"/>
-        <thumb-down :thumbs-down="thumbsDown.length"/>
-        <honour :honors="honours.length"/>
+        <star :stars="user.stars"/>
+        <thumb-down :thumbs-down="user.thumbsDown"/>
+        <honour :honors="user.honours"/>
     </div>
 </template>
 
@@ -11,34 +11,11 @@
   import Star      from './Star'
   import ThumbDown from './ThumbDown'
   import Honour     from './Honour'
-  import { db }    from '../../../main'
 
   export default {
     props     : ['user'],
     components: { Star, Honour, ThumbDown },
     name      : 'RankItem',
-    data() {
-      return {
-        stars: [],
-        thumbsDown: [],
-        honours: []
-      }
-    },
-    firestore() {
-      return {
-        stars: db.collection('users')
-          .doc(this.user.uid)
-          .collection('stars'),
-
-        honours: db.collection('users')
-          .doc(this.user.uid)
-          .collection('honours'),
-
-        thumbsDown: db.collection('users')
-          .doc(this.user.uid)
-          .collection('thumbsDown')
-      }
-    }
   }
 </script>
 
