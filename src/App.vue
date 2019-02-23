@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <nav-bar/>
+        <nav-bar v-if="user" :user="user"/>
         <modal/>
         <p v-if="loading">Laster..</p>
         <router-view v-else/>
@@ -34,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["loading"])
+    ...mapState(["loading", 'user'])
   }
 };
 </script>

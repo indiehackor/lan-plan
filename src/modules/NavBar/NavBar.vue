@@ -1,18 +1,18 @@
 <template>
     <div id="nav-bar">
         <section class="email">
-            {{email}}
+            {{user.email}}
             <section class="info">
                 <h2>har igjen</h2>
-                <span><star/> {{stars}}</span>
-                <span><honour/> {{honours}}</span>
-                <span><thumb/> {{thumbsDown}}</span>
+                <span><star/> {{liveUser.stars}}</span>
+                <span><honour/> {{liveUser.honours}}</span>
+                <span><thumb/> {{liveUser.thumbsDown}}</span>
             </section>
         </section>
-        <confirm-users-list v-if="admin"/>
+        <confirm-users-list v-if="user.admin"/>
         <div>
-            <give-ratings v-if="admin"/>
-            <button v-if="email" @click="signOutCurrentUser">
+            <give-ratings v-if="user.admin"/>
+            <button @click="signOutCurrentUser">
                 Logg ut
             </button>
         </div>
@@ -20,29 +20,39 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-  import ConfirmUsersList         from './components/ConfirmUsersList'
-  import GiveRatings from './components/GiveRatings'
-  import Honour from '../../components/icons/Honour'
-  import Star from '../../components/icons/Star'
-  import Thumb from '../../components/icons/ThumbDown'
+import { mapActions } from "vuex";
+import ConfirmUsersList from "./components/ConfirmUsersList";
+import GiveRatings from "./components/GiveRatings";
+import Honour from "../../components/icons/Honour";
+import Star from "../../components/icons/Star";
+import Thumb from "../../components/icons/ThumbDown";
+import { db } from "../../main";
 
-  export default {
-    name      : 'NavBar',
-    components: { ConfirmUsersList, GiveRatings, Star, Honour, Thumb},
-    methods   : {
-      ...mapActions([
-        'signOutCurrentUser'
-      ]),
-    },
-    computed  : mapState({
-      email: state => state.user ? state.user.email : '',
-      admin: state => state.user ? state.user.admin : false,
-      stars: state => state.user ? state.user.stars : 0,
-      honours: state => state.user ? state.user.honours : 0,
-      thumbsDown: state => state.user ? state.user.thumbsDown : 0,
-    })
+export default {
+  name: "NavBar",
+  components: { ConfirmUsersList, GiveRatings, Star, Honour, Thumb },
+  props: ["user"],
+  data() {
+    return {
+      liveUser: {
+        stars: 0,
+        honours: 0,
+        thumbsDown: 0
+      },
+      stars: 0,
+      honours: 0,
+      thumbsDown: 0
+    }
+  },
+  methods: {
+    ...mapActions(["signOutCurrentUser"])
+  },
+  firestore() {
+    return {
+      liveUser: db.collection("users").doc(this.user.uid)
+    };
   }
+};
 </script>
 
 <style lang="sass" scoped>
