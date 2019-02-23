@@ -2,7 +2,7 @@ import { fb, db } from './main'
 import store      from './store'
 
 export function populateUsersArray() {
-  return db.collection('users').get().then(data => {
+  db.collection('users').get().then(data => {
     data.docs.forEach(user => {
       const userPromises = []
       userPromises.push(user.ref.collection('stars').get())
@@ -30,7 +30,6 @@ export function listenForRateUpdates(uid) {
 
 function setListener(uid, type) {
   db.collection("users").doc(uid).collection(type).onSnapshot(result => {
-    // console.log(`${type} ${result.size}`)
     store.commit('updateRating', {
       [type]: result.size,
       uid
@@ -118,9 +117,11 @@ export function addRating(type, uidGive, uidGet) {
       const newBalance = doc.data()[type] - 1
       if (newBalance < 0) {
         console.log(`${doc.data().username} is all out of ${type}`)
+        // TODO Legg til action som vise feilmelding
         return
       }
       console.log(`Setting ${type} to ${newBalance} for ${doc.data().username}`)
+      // TODO Legg til action som viser info melding om hvor mange stjerner du har igjen
       return setRatingBalance(type, uidGive, newBalance)
     })
     .catch(err => {
