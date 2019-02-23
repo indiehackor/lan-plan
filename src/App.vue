@@ -2,7 +2,7 @@
     <div id="app">
         <nav-bar/>
         <modal/>
-        <p v-if="loading">Loading..</p>
+        <p v-if="loading">Laster..</p>
         <router-view v-else/>
     </div>
 </template>
