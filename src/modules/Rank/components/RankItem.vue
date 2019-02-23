@@ -8,14 +8,18 @@
 </template>
 
 <script>
-  import Star      from './Star'
-  import ThumbDown from './ThumbDown'
-  import Honour     from './Honour'
+  import Star                     from './Star'
+  import ThumbDown                from './ThumbDown'
+  import Honour                   from './Honour'
+  import { listenForRateUpdates } from '../../../firebaseApi'
 
   export default {
     props     : ['user'],
     components: { Star, Honour, ThumbDown },
     name      : 'RankItem',
+    created() {
+      listenForRateUpdates(this.user.uid, 'stars')
+    }
   }
 </script>
 
