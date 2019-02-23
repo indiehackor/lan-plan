@@ -4,6 +4,7 @@ import Main      from './modules/MainView/Main'
 import Rate      from './modules/Rate/Rate'
 import Rank      from './modules/Rank/Rank'
 import Register  from './modules/login/Register'
+import Sent      from './modules/login/Sent'
 
 const router = new VueRouter({
   mode  : 'history',
@@ -22,6 +23,7 @@ const router = new VueRouter({
       ]
     },
     { path: '/login', component: Login },
+    { path: '/sent', component: Sent },
     { path: '/register', component: Register }
   ]
 })
