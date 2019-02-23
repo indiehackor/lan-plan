@@ -1,7 +1,7 @@
 <template>
-    <div class="rate-item">
+    <div class="rate-item" :class="{me: user.uid === loggedInUid}">
         <span>{{user.username}}</span>
-        <div class="buttons">
+        <div v-if="user.uid !== loggedInUid" class="buttons">
             <star-button
                 @star-click="handleStarClick"
             />
@@ -16,15 +16,20 @@
 </template>
 
 <script>
-import HonorButton from "./HonorButton";
-import StarButton from "./StarButton";
-import ThumbDownButton from "./ThumbDownButton";
-import { mapActions } from "vuex";
+import HonorButton              from "./HonorButton";
+import StarButton               from "./StarButton";
+import ThumbDownButton          from "./ThumbDownButton";
+import { mapActions, mapState } from 'vuex'
 
 export default {
   components: { HonorButton, StarButton, ThumbDownButton },
   props: ["user"],
   name: "RateItem",
+  computed: {
+    ...mapState({
+      loggedInUid: state => state.user.uid,
+    })
+  },
   methods: {
     ...mapActions(["showModal"]),
     handleThumbClick() {
@@ -59,6 +64,10 @@ export default {
         margin-bottom: 10px
         height: 80px
         transition: color 300ms
+        &.me
+            &:hover
+                color: white
+                text-underline: white
         &:hover
             color: transparent
 
