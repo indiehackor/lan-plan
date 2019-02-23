@@ -22,9 +22,6 @@ export function populateUsersArray() {
   })
 }
 
-// TODO Make function that populates state with users and their current rating.
-
-
 /**
  * Log in to firebase with email and password
  * @param email
