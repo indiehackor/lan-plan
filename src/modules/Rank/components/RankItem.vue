@@ -3,7 +3,7 @@
         <span class="username" :class="{me: user.username === me.username}">{{user.username}}</span>
         <star :stars="user.stars"/>
         <thumb-down :thumbs-down="user.thumbsDown"/>
-        <honour :honors="user.honours"/>
+        <honour :honours="user.honours"/>
     </div>
 </template>
 
