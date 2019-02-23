@@ -38,7 +38,7 @@
             </router-link>
             <button
                 id="login-button"
-            >Logg inn
+            >{{ forgotPassword ? 'Send epost' : 'Logg inn'}}
             </button>
         </section>
     </form>
@@ -69,12 +69,13 @@ export default {
     ...mapActions(["startLoading"]),
     letsGo(e) {
       e.preventDefault();
-      this.startLoading();
       if (!this.forgotPassword) {
+        this.startLoading();
         login(this.email, this.password);
         this.$router.push("/rank");
       } else {
         sendResetEmail(this.email);
+        this.$router.push("/sent")
       }
     }
   }
