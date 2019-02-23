@@ -13,7 +13,7 @@
   import { fb }                   from './main'
   import { mapActions, mapState } from 'vuex'
   import Modal                    from './modules/Modal/Modal'
-
+  import { populateUsersArray }   from './firebaseApi'
 
   export default {
     name      : 'app',
@@ -39,6 +39,9 @@
     },
     computed  : {
       ...mapState(['loading'])
+    },
+    created() {
+      populateUsersArray()
     }
   }
 </script>
