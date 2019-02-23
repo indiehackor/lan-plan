@@ -1,6 +1,6 @@
 <template lang="html">
     <form class="login-container" @submit="letsGo">
-        <h1>Login</h1>
+        <h1>Logg Inn</h1>
 
         <label
             for="email"
