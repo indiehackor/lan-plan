@@ -9,9 +9,6 @@
             <button v-if="email" @click="signOutCurrentUser">
                 Sign out
             </button>
-            <button v-else @click="signIn">
-                Sign in
-            </button>
         </div>
     </div>
 </template>
@@ -28,9 +25,6 @@
       ...mapActions([
         'signOutCurrentUser'
       ]),
-      signIn() {
-        this.$router.push('/login')
-      }
     },
     computed  : mapState({
       email: state => state.user ? state.user.email : '',
