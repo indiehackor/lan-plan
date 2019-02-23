@@ -11,10 +11,10 @@ export function populateUsersArray() {
 
       Promise.all(userPromises).then(snapshots => {
         const arrUser = {
-          username: user.data().username,
           stars: snapshots[0].docs.length,
           honours: snapshots[1].docs.length,
-          thumbsDown: snapshots[2].docs.length
+          thumbsDown: snapshots[2].docs.length,
+          ...user.data()
         }
         store.commit('addUserToArray', arrUser)
       })
