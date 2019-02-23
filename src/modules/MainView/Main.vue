@@ -8,14 +8,14 @@
 
 
 <script>
-  import { mapState } from 'vuex'
-  import Tabs         from './components/Tabs'
+  import { mapState }             from 'vuex'
+  import Tabs                     from './components/Tabs'
 
   export default {
     name      : 'Ratings',
     components: { Tabs },
     computed  : {
-      ...mapState(['user'])
+      ...mapState(['user', 'users'])
     },
   }
 
