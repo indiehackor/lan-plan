@@ -1,5 +1,5 @@
 <template>
-    <div class="rank-item">
+    <div class="rank-item" :class="{unconfirmed: !user.confirmed}">
         <span class="username" :class="{me: user.username === me.username}">{{user.username}}</span>
         <star :stars="user.stars"/>
         <thumb-down :thumbs-down="user.thumbsDown"/>
@@ -41,4 +41,6 @@
             padding: 5px
             text-align: left
             flex: 1
+    .unconfirmed
+        background: white
 </style>
