@@ -1,6 +1,6 @@
 <template>
     <div class="list-container">
-        <rate-item v-for="user in users" :key="user.uid" :user="user"/>
+        <rate-item v-for="user in confirmedUsers" :key="user.uid" :user="user"/>
     </div>
 </template>
 
@@ -12,7 +12,10 @@
     name      : 'Rate',
     components: { RateItem },
     computed: {
-      ...mapState(['users'])
+      ...mapState(['users']),
+      confirmedUsers() {
+        return this.users.filter(user => user.confirmed)
+      }
     }
   }
 </script>
