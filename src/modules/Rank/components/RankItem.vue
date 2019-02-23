@@ -1,6 +1,6 @@
 <template>
     <div class="rank-item">
-        <span class="username">{{user.username}}</span>
+        <span class="username" :class="{me: user.username === me.username}">{{user.username}}</span>
         <star :stars="user.stars"/>
         <thumb-down :thumbs-down="user.thumbsDown"/>
         <honour :honors="user.honours"/>
@@ -8,14 +8,18 @@
 </template>
 
 <script>
-  import Star                     from './Star'
-  import ThumbDown                from './ThumbDown'
-  import Honour                   from './Honour'
+  import Star         from './Star'
+  import ThumbDown    from './ThumbDown'
+  import Honour       from './Honour'
+  import { mapState } from 'vuex'
 
   export default {
     props     : ['user'],
     components: { Star, Honour, ThumbDown },
     name      : 'RankItem',
+    computed: {
+      ...mapState({me: state => state.user})
+    }
   }
 </script>
 
@@ -27,6 +31,8 @@
         > *
             margin-right: 10px
             min-width: 110px
+        .me
+            font-weight: 700
 
         .username
             padding: 5px
