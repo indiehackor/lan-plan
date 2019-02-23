@@ -2,9 +2,15 @@
     <div>
         <section class="sort">
             <h2>Sorter:</h2>
-            <button @click="sortByStar">S</button>
-            <button @click="sortByHonour">H</button>
-            <button @click="sortByThumbsDown">TD</button>
+            <button @click="sortByStar">
+                <star/>
+            </button>
+            <button @click="sortByHonour">
+                <honour/>
+            </button>
+            <button @click="sortByThumbsDown">
+                <thumb-down/>
+            </button>
         </section>
         <div class="list-container">
             <rank-item v-for="user in sortedUsers" :key="user.uid" :user="user"/>
@@ -15,9 +21,12 @@
 <script>
   import RankItem     from './components/RankItem'
   import { mapState } from 'vuex'
+  import Star         from '../../components/icons/Star'
+  import Honour       from '../../components/icons/Honour'
+  import ThumbDown    from '../../components/icons/ThumbDown'
 
   export default {
-    components: { RankItem },
+    components: { ThumbDown, Honour, Star, RankItem },
     name      : 'Rank',
     data() {
       return {
@@ -47,6 +56,20 @@
 </script>
 
 <style scoped lang="sass">
+    button
+        height: 60px
+        width: 60px
+        border-radius: 30px
+        padding: 0
+        color: white
+        background: transparent
+        border: none
+        transition: 200ms
+        &:hover
+            color: lightslategrey
+            background: white
+        &:focus
+            outline: none
     .list-container
         width: 600px
         margin: 10px auto
@@ -54,8 +77,11 @@
     .sort
         display: flex
         justify-content: center
+        align-items: center
 
         > *
             margin: 5px
-
+    svg
+        height: 30px
+        width: 30px
 </style>
