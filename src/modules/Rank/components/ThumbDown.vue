@@ -1,19 +1,32 @@
 <template>
-    <span>
-        tommel ned {{thumbsDown}}
+    <span class="container">
+        <span>
+            {{thumbsDown}}
+        </span>
+        <thumb-icon/>
     </span>
 </template>
 
 <script>
+  import ThumbIcon from '../../../components/icons/ThumbDown'
+
   export default {
-    props: ['thumbsDown'],
-    name: 'ThumbDown'
+    components: { ThumbIcon },
+    props     : ['thumbsDown'],
+    name      : 'ThumbDown'
   }
 </script>
 
 <style scoped lang="sass">
-    span
+    .container
         border: 1px solid white
         border-radius: 2px
-        padding: 5px
+        padding: 0 20px
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        svg
+            height: 15px
+            width: 15px
 </style>
