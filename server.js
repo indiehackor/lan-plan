@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/.well-known/acme-challenge/uLyioDO6Jxk-RrxtkjQJW8EsNOzyYKjnW3fn2Ck1h5k', function (req, res) {
-  res.render(path.join(__dirname + '/dist/cert.html'));
+  res.send('uLyioDO6Jxk-RrxtkjQJW8EsNOzyYKjnW3fn2Ck1h5k.py7W8Is9OWzzLoboYjmqVlW5i0kE-H-SFqZQDnh8oto');
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {
