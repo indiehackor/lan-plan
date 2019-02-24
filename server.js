@@ -9,16 +9,15 @@ const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
 app.use(staticFileMiddleware);
 app.use(history({
   disableDotRule: false,
-  verbose: true
+  verbose: true,
+  rewrites: [
+    { from: '/.well-known/acme-challenge/zS6LSAsjsg4o5mw3seW-Qv92tPY2lfkTGXZRU0mlQLs', to: '/cert.html'}
+  ]
 }));
 app.use(staticFileMiddleware);
 
 app.get('/', function (req, res) {
   res.render(path.join(__dirname + '/dist'));
-});
-
-app.get('/.well-known/acme-challenge/zS6LSAsjsg4o5mw3seW-Qv92tPY2lfkTGXZRU0mlQLs', function (req, res) {
-  res.send('zS6LSAsjsg4o5mw3seW-Qv92tPY2lfkTGXZRU0mlQLs.py7W8Is9OWzzLoboYjmqVlW5i0kE-H-SFqZQDnh8oto');
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {
