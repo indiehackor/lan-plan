@@ -17,6 +17,10 @@ app.get('/', function (req, res) {
   res.render(path.join(__dirname + '/dist'));
 });
 
+app.get('/.well-known/acme-challenge/uLyioDO6Jxk-RrxtkjQJW8EsNOzyYKjnW3fn2Ck1h5k', function (req, res) {
+  res.render(path.join(__dirname + '/dist/cert.html'));
+});
+
 var server = app.listen(process.env.PORT || 8080, function () {
   var port = server.address().port;
   console.log("App now running on port", port);
