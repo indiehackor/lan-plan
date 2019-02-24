@@ -9,6 +9,7 @@ import Sent      from './modules/login/Sent'
 const router = new VueRouter({
   mode  : 'history',
   routes: [
+    { path: '/', redirect: '/rank' },
     {
       path    : '/', component: Main,
       children: [
