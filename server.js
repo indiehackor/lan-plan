@@ -17,8 +17,8 @@ app.get('/', function (req, res) {
   res.render(path.join(__dirname + '/dist'));
 });
 
-app.get('/.well-known/acme-challenge/uLyioDO6Jxk-RrxtkjQJW8EsNOzyYKjnW3fn2Ck1h5k', function (req, res) {
-  res.send('uLyioDO6Jxk-RrxtkjQJW8EsNOzyYKjnW3fn2Ck1h5k.py7W8Is9OWzzLoboYjmqVlW5i0kE-H-SFqZQDnh8oto');
+app.get('/.well-known/acme-challenge/zS6LSAsjsg4o5mw3seW-Qv92tPY2lfkTGXZRU0mlQLs', function (req, res) {
+  res.send('zS6LSAsjsg4o5mw3seW-Qv92tPY2lfkTGXZRU0mlQLs.py7W8Is9OWzzLoboYjmqVlW5i0kE-H-SFqZQDnh8oto');
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {
