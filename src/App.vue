@@ -52,7 +52,7 @@ export default {
 h1,
 h2 {
   text-transform: uppercase;
-  line-height: 0.8;
+  line-height: 1;
 }
 
 h1 {
@@ -72,6 +72,7 @@ body {
   background-size: 400% 400%;
   animation: AnimationName 60s ease infinite;
   color: white;
+  margin: 0;
 }
 
 @keyframes AnimationName {
@@ -84,5 +85,11 @@ body {
   100% {
     background-position: 0 50%;
   }
+}
+
+@media (max-width: 700px) {
+    #app {
+        padding: 20px
+    }
 }
 </style>

@@ -84,4 +84,8 @@
     svg
         height: 30px
         width: 30px
+
+    @media (max-width: 700px)
+        .list-container
+            width: 100%
 </style>

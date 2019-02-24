@@ -109,7 +109,7 @@ export default {
   height: 400px;
   width: 400px;
   background: white;
-  position: absolute;
+  position: fixed;
   top: 100px;
   color: #2e8edd;
   left: 50%;
@@ -180,12 +180,12 @@ button:focus {
 
 .overlay {
   background: rgba(0, 0, 0, 0.6);
-  position: absolute;
+  position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
+  height: 100%;
 }
 
 .fade-enter-active,

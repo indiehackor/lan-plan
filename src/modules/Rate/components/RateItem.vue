@@ -105,5 +105,14 @@ export default {
         100%
             background: transparent
 
+    @media (max-width: 700px)
+        .rate-item
+            padding: 0 20px
+            justify-content: space-between
+            .buttons
+                position: relative
+                opacity: 1
+                width: unset
+
 
 </style>

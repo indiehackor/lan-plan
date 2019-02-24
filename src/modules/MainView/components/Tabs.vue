@@ -66,4 +66,7 @@ section
         &.right
             left: 100%
             transform: translateX(-100%)
+@media (max-width: 700px)
+    section
+        width: 100%
 </style>

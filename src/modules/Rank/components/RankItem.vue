@@ -26,6 +26,7 @@
 <style scoped lang="sass">
     .rank-item
         display: flex
+        flex-wrap: wrap
         justify-content: space-between
         align-items: center
         margin-bottom: 10px
@@ -40,7 +41,19 @@
             font-size: 18px
             padding: 5px
             text-align: left
-            flex: 1
     .unconfirmed
         background: white
+    @media (min-width: 700px)
+        .rank-item
+            .username
+                flex: 1
+    @media screen and (max-width: 700px)
+        .rank-item
+            justify-content: space-between
+            padding: 0 20px
+            margin: 20px 0
+            > *
+                margin-right: 0
+            .username
+                flex: 1 1 100%
 </style>

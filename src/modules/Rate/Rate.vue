@@ -24,4 +24,7 @@
     .list-container
         width: 500px
         margin: 10px auto
+    @media screen and (max-width: 700px)
+        .list-container
+            width: 100%
 </style>
