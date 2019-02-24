@@ -8,7 +8,7 @@ const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
 
 app.use(staticFileMiddleware);
 app.use(history({
-  disableDotRule: true,
+  disableDotRule: false,
   verbose: true
 }));
 app.use(staticFileMiddleware);
